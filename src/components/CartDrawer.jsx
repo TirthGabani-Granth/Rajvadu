@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 import './CartDrawer.css';
@@ -7,6 +8,18 @@ export default function CartDrawer() {
     cartItems, cartTotal, isCartOpen, setIsCartOpen, 
     updateQuantity, removeFromCart 
   } = useCart();
+
+  useEffect(() => {
+    if (isCartOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isCartOpen]);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-IN', {

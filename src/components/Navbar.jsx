@@ -19,6 +19,17 @@ export default function Navbar() {
     setIsMobileMenuOpen(false);
   }, [location]);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <nav className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`} id="main-navbar">
       <div className="navbar__container container">
@@ -36,18 +47,6 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="navbar__logo" id="nav-logo">
-          <div className="navbar__logo-ornament">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <path d="M16 2L20 8L28 8L22 14L24 22L16 18L8 22L10 14L4 8L12 8L16 2Z" 
-                    fill="url(#goldGrad)" stroke="currentColor" strokeWidth="0.5"/>
-              <defs>
-                <linearGradient id="goldGrad" x1="4" y1="2" x2="28" y2="22">
-                  <stop stopColor="#e2c992"/>
-                  <stop offset="1" stopColor="#a07d4a"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
           <div className="navbar__logo-text">
             <span className="navbar__logo-brand">RAJVADU</span>
             <span className="navbar__logo-tagline">Royal Heritage</span>
